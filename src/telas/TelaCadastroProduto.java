@@ -99,15 +99,21 @@ public class TelaCadastroProduto extends JFrame {
                 double precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA;
                 int quantidadeProduto,codigoProduto;
                 //entrada
-                nomeProduto = jtfNomeProduto.getText();
-                categoriaProduto = jtfCategoriaProduto.getText();
-                precoProduto = Double.parseDouble(jtfPrecoProduto.getText());
-                dimensaoProdutoL = Double.parseDouble(jtfDimensaoProdutoL.getText());
-                dimensaoProdutoC = Double.parseDouble(jtfDimensaoProdutoC.getText());
-                dimensaoProdutoA = Double.parseDouble(jtfDimensaoProdutoA.getText());
-                quantidadeProduto = Integer.parseInt(jtfQuantidadeProduto.getText());
-                codigoProduto = Integer.parseInt(jtfCodigoProduto.getText());
-                produto = new Produto(nomeProduto,categoriaProduto,precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA,quantidadeProduto,codigoProduto);
+                if (jtfNomeProduto.getText().isEmpty() || jtfCategoriaProduto.getText().isEmpty() || jtfPrecoProduto.getText().isEmpty() || jtfDimensaoProdutoL.getText().isEmpty() || jtfDimensaoProdutoC.getText().isEmpty() || jtfDimensaoProdutoA.getText().isEmpty() || jtfQuantidadeProduto.getText().isEmpty() || jtfCodigoProduto.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Algo está faltando!");
+                }
+                else {
+                    nomeProduto = jtfNomeProduto.getText();
+                    categoriaProduto = jtfCategoriaProduto.getText();
+                    precoProduto = Double.parseDouble(jtfPrecoProduto.getText());
+                    dimensaoProdutoL = Double.parseDouble(jtfDimensaoProdutoL.getText());
+                    dimensaoProdutoC = Double.parseDouble(jtfDimensaoProdutoC.getText());
+                    dimensaoProdutoA = Double.parseDouble(jtfDimensaoProdutoA.getText());
+                    quantidadeProduto = Integer.parseInt(jtfQuantidadeProduto.getText());
+                    codigoProduto = Integer.parseInt(jtfCodigoProduto.getText());
+                    produto = new Produto(nomeProduto,categoriaProduto,precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA,quantidadeProduto,codigoProduto);
+                }
+
             }
         });
         jbMostrar.addActionListener(new ActionListener() {
