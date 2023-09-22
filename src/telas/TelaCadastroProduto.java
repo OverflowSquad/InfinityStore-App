@@ -98,20 +98,51 @@ public class TelaCadastroProduto extends JFrame {
                 String nomeProduto,categoriaProduto;
                 double precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA;
                 int quantidadeProduto,codigoProduto;
+                String erroCampoVazio = "";
                 //entrada
                 if (jtfNomeProduto.getText().isEmpty() || jtfCategoriaProduto.getText().isEmpty() || jtfPrecoProduto.getText().isEmpty() || jtfDimensaoProdutoL.getText().isEmpty() || jtfDimensaoProdutoC.getText().isEmpty() || jtfDimensaoProdutoA.getText().isEmpty() || jtfQuantidadeProduto.getText().isEmpty() || jtfCodigoProduto.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Algo está faltando!");
+                    if (jtfNomeProduto.getText().isEmpty()){
+                        erroCampoVazio += "Nome do produto;\n";
+                    }
+                    if (jtfCategoriaProduto.getText().isEmpty()){
+                        erroCampoVazio += "Categoria;\n";
+                    }
+                    if (jtfPrecoProduto.getText().isEmpty()){
+                        erroCampoVazio += "Preço;\n";
+                    }
+                    if (jtfDimensaoProdutoL.getText().isEmpty()){
+                        erroCampoVazio += "Dimensão da largura;\n";
+                    }
+                    if (jtfDimensaoProdutoC.getText().isEmpty()){
+                        erroCampoVazio += "Dimensão do comprimento;\n";
+                    }
+                    if (jtfDimensaoProdutoA.getText().isEmpty()){
+                        erroCampoVazio += "Dimensão da altura;\n";
+                    }
+                    if (jtfQuantidadeProduto.getText().isEmpty()){
+                        erroCampoVazio += "Quantidade;\n";
+                    }
+                    if (jtfCodigoProduto.getText().isEmpty()){
+                        erroCampoVazio += "Código;\n";
+                    }
+                    JOptionPane.showMessageDialog(null,"Os seguintes campos estão vazios:\n\n"+erroCampoVazio+"\nPreencha todos os dados corretamente.","Aviso",JOptionPane.WARNING_MESSAGE);
                 }
                 else {
-                    nomeProduto = jtfNomeProduto.getText();
-                    categoriaProduto = jtfCategoriaProduto.getText();
-                    precoProduto = Double.parseDouble(jtfPrecoProduto.getText());
-                    dimensaoProdutoL = Double.parseDouble(jtfDimensaoProdutoL.getText());
-                    dimensaoProdutoC = Double.parseDouble(jtfDimensaoProdutoC.getText());
-                    dimensaoProdutoA = Double.parseDouble(jtfDimensaoProdutoA.getText());
-                    quantidadeProduto = Integer.parseInt(jtfQuantidadeProduto.getText());
-                    codigoProduto = Integer.parseInt(jtfCodigoProduto.getText());
-                    produto = new Produto(nomeProduto,categoriaProduto,precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA,quantidadeProduto,codigoProduto);
+
+                    try {
+                        precoProduto = Double.parseDouble(jtfPrecoProduto.getText().replaceAll(",","."));
+                        dimensaoProdutoL = Double.parseDouble(jtfDimensaoProdutoL.getText().replaceAll(",","."));
+                        dimensaoProdutoC = Double.parseDouble(jtfDimensaoProdutoC.getText().replaceAll(",","."));
+                        dimensaoProdutoA = Double.parseDouble(jtfDimensaoProdutoA.getText().replaceAll(",","."));
+                        quantidadeProduto = Integer.parseInt(jtfQuantidadeProduto.getText());
+                        codigoProduto = Integer.parseInt(jtfCodigoProduto.getText());
+                        nomeProduto = jtfNomeProduto.getText();
+                        categoriaProduto = jtfCategoriaProduto.getText();
+                        produto = new Produto(nomeProduto,categoriaProduto,precoProduto,dimensaoProdutoL,dimensaoProdutoC,dimensaoProdutoA,quantidadeProduto,codigoProduto);
+                    }
+                    catch (Exception E) {
+                        JOptionPane.showMessageDialog(null,"Utilize apenas números nos campos de\npreço, dimensão, quantidade e código.");
+                    }
                 }
 
             }
